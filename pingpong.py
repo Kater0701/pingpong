@@ -32,12 +32,25 @@ class Player(GameSprite):
         if key_pressed[K_s]:
             self.rect.y += self.speed
 
+class Circle(GameSprite):
+    def update(self):
+        if self.direction[0] == 'right':
+            self.rect.x += self.speed
+        if self.direction[0] == 'left':
+            self.rect.x -= self.speed
+        if self.direction[1] == 'down':
+            self.rect.y += self.speed
+        if self.direction[1] == 'up':
+            self.rect.y -= self.speed
 Player_left = Player('rectangle.png', 10, 10, 3, 25, 75)
 Player_right = Player('rectangle.png', 665, 10, 3, 25, 75)
+Ball = Circle('ball_tennis.png', 325, 225, 2, 50, 50, ['left', 'down'])
 
 game = True
 while game:
     window.fill(bg)
+    Ball.reset()
+    Ball.update()
     Player_left.reset()
     Player_left.update_left()
     Player_right.reset()
@@ -47,8 +60,4 @@ while game:
         if e.type == QUIT:
             game = False
     display.update()
-    clock.tick(60)
-            game = False
-    display.update()
-
     clock.tick(60)
