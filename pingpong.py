@@ -2,7 +2,8 @@ from pygame import *
 
 window = display.set_mode((700, 500))
 display.set_caption('Пингпонг')
-window.fill((200, 255, 255))
+bg = (200, 255, 255)
+window.fill(bg)
 clock = time.Clock()
 
 class GameSprite(sprite.Sprite):
@@ -31,10 +32,23 @@ class Player(GameSprite):
         if key_pressed[K_s]:
             self.rect.y += self.speed
 
+Player_left = Player('rectangle.png', 10, 10, 3, 25, 75)
+Player_right = Player('rectangle.png', 665, 10, 3, 25, 75)
+
 game = True
 while game:
+    window.fill(bg)
+    Player_left.reset()
+    Player_left.update_left()
+    Player_right.reset()
+    Player_right.update_right()
+
     for e in event.get():
         if e.type == QUIT:
             game = False
     display.update()
+    clock.tick(60)
+            game = False
+    display.update()
+
     clock.tick(60)
